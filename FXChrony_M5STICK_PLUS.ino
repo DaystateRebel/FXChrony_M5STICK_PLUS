@@ -44,6 +44,8 @@ OneButton button(PIN_INPUT, true);
 
 #define seconds() (millis()/1000)
 
+#define MAX_SHOT_HISTORY 4
+
 static uint8_t state = STATE_IDLE;
 
 static float chronyVBattery;
@@ -431,8 +433,6 @@ bool readBattery(){
   return true;  
 }
 
-#define MAX_SHOT_HISTORY 4
-
 static void notifyCallback(
   BLERemoteCharacteristic* pBLERemoteCharacteristic,
   uint8_t* pData,
@@ -517,9 +517,7 @@ void connectToChrony() {
 //roll = 180 * atan (accelerationY/sqrt(accelerationX*accelerationX + accelerationZ*accelerationZ))/M_PI;
 //yaw = 180 * atan (accelerationZ/sqrt(accelerationX*accelerationX + accelerationZ*accelerationZ))/M_PI;
 
-
-
-void calculate_roll()
+void calculate_roll(bool override)
 {
   int i;
   float accX = 0.0F;
@@ -531,10 +529,10 @@ void calculate_roll()
   roll = 180 * atan (accY/sqrt(accX*accX + accZ*accZ))/M_PI;
  
   int old_average = (int)(roll_moving_average_total / ROLL_MOVING_AVE_LENGTH);
-  if(old_average < -50) {
-    old_average = -50;
-  } else if(old_average > 50) {
-    old_average = 50;
+  if(old_average < -45) {
+    old_average = -45;
+  } else if(old_average > 45) {
+    old_average = 45;
   }
 
   roll_moving_average_total -= roll_moving_average[roll_moving_average_index];
@@ -544,13 +542,13 @@ void calculate_roll()
   roll_moving_average_index %= ROLL_MOVING_AVE_LENGTH; 
 
   int new_average = (int)(roll_moving_average_total / ROLL_MOVING_AVE_LENGTH);
-  if(new_average < -50) {
-    new_average = -50;
-  } else if(new_average > 50) {
-    new_average = 50;
+  if(new_average < -45) {
+    new_average = -45;
+  } else if(new_average > 45) {
+    new_average = 45;
   }
 
-  if(old_average != new_average) {
+  if((old_average != new_average) || override) {
     uint16_t tri_colour = TFT_RED;
     if(new_average > -1 && new_average < 1) {
       tri_colour = TFT_GREEN;
@@ -560,44 +558,8 @@ void calculate_roll()
 
     M5.Lcd.fillTriangle(239, 68+old_average, 220, 60+old_average, 220, 77+old_average, TFT_BLACK);
     M5.Lcd.fillTriangle(239, 68+new_average, 220, 60+new_average, 220, 77+new_average, tri_colour);
-
   }
-
-
-/*
-  if(old_average != new_average) {
-    uint16_t font_colour = TFT_RED;
-    if(new_average > -1 && new_average < 1) {
-      font_colour = TFT_GREEN;
-      for(i=0;i<6;i++) {
-        M5.Lcd.drawLine(0, 65+i, 10, 65+i, TFT_GREEN);
-        M5.Lcd.drawLine(230, 65+i, 239, 65+i, TFT_GREEN);
-      }
-    } else {
-      for(i=0;i<6;i++) {
-        M5.Lcd.drawLine(0, 65+i, 10, 65+i, TFT_BLACK);
-        M5.Lcd.drawLine(230, 65+i, 239, 65+i, TFT_BLACK);
-      }
-      for(i=0;i<2;i++) {
-        M5.Lcd.drawLine(0, 67+i, 10, 67+i, TFT_RED);
-        M5.Lcd.drawLine(230, 67+i, 239, 67+i, TFT_RED);
-      }
-    }
-
-    for(i=0;i<4;i++) {
-      M5.Lcd.drawLine(3+i, 68, 3+i, 68-old_average, TFT_BLACK);
-      M5.Lcd.drawLine(3+i, 68, 3+i, 68-new_average, font_colour);
-
-      M5.Lcd.drawLine(233+i, 68, 233+i, 68+old_average, TFT_BLACK);
-      M5.Lcd.drawLine(233+i, 68, 233+i, 68+new_average, font_colour);
-    }
-  }
-*/
-  
  }
-
-
-
 
 void handle_new_shot()
 {
@@ -681,8 +643,6 @@ void handle_new_shot()
               TFT_BLACK,
               Layout::Horizontal);
 
-
-
   render.setFontSize(15);
   /* Draw the return signal strength */
   sprintf (sbuffer, "R %d%%", notified_return);
@@ -707,10 +667,8 @@ void handle_new_shot()
   notified_new_shot = false;
 }
 
-
-
 void loop() {
-
+  bool override_angle_change = false;
   unsigned long now = seconds();  
 
   if( !power_saving && 
@@ -722,7 +680,6 @@ void loop() {
     display_on_at = seconds();
     power_saving = true;
   }
-
 
   button.tick();
   if(dirty) {
@@ -755,20 +712,19 @@ void loop() {
         readBattery();
         chronyVBattLastRead = now;
       }        
+       
       if(notified_new_shot) {
+        override_angle_change = true;
         handle_new_shot();
       }
-      calculate_roll();
+      calculate_roll(override_angle_change);
       break;
   }
 }
 
-
 /* 
   Menu system
 */
-
-
 static void sleepCallback(uint8_t param)
 {
   //u8g2.setPowerSave(1);

@@ -1,39 +1,34 @@
 # FXChrony_M5STICK_PLUS
 
-FX Chrony display for the M5 Stick C Plus
+## Introduction
 
-## Required Board definitions: 
+This repository contains the FX Chrony display code for the M5 Stick C Plus. The FX Chrony display is a simple and effective way to keep track of your shooting data in real-time. With this project, you can quickly and easily get started with using the M5 Stick C Plus to display important shooting information such as your shot velocity, shot count, and more.
 
-In the Arduino IDE go to File | Preferences and add 
+## Required Board Definitions
 
-https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/arduino/package_m5stack_index.json 
+Before you can use this code, you need to have the M5 Stack board definitions installed in the Arduino IDE. To do this, follow these steps:
 
-To the Additional board manager URLS
+1. In the Arduino IDE, go to `File` > `Preferences`
+2. Add `https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/arduino/package_m5stack_index.json` to the `Additional board manager URLS` field
+3. Go to `Tools` > `Board` > `Boards manager`
+4. Search for and install "M5Stack"
+5. Go to `Tools` > `Board`
+6. Select `M5Stick-C-Plus`
 
-Go to Tools | Board | Boards manager 
+## Required Libraries
 
-Search for and install "M5Stack" 
-
-Go to Tools | Board
-
-Select M5Stick-C-Plus
-
-## Required Libraries 
+This project uses the M5StickCPlus and OpenFontRender libraries. To install these libraries, follow these steps:
 
 ### M5StickCPlus
 
-Got to Sketch | Include Library | Manage Libraries
-
-Search for and install M5StickCPlus
+1. Go to `Sketch` > `Include Library` > `Manage Libraries`
+2. Search for and install `M5StickCPlus`
 
 ### OpenFontRender
-Download the Open Font Render library from here
 
-https://github.com/takkaO/OpenFontRender
+1. Download the Open Font Render library from [here](https://github.com/takkaO/OpenFontRender)
+2. Click the green `Code` button to download the library
+3. Go to `Sketch` > `Include Library` > `Add .Zip Library`
+4. Choose the file you downloaded
 
-(Click green Code button)
-
-Got to Sketch | Include Library | Add .Zip Library
-
-Chose the file you downloaded
-
+With these steps completed, you should now have everything you need to start using this project. Happy coding!

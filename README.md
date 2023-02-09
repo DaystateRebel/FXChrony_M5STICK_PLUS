@@ -28,7 +28,7 @@ Instructions to start with Arduino IDE 'https://docs.m5stack.com/en/quick_start/
 2. Select "M5Stick-C-Plus"
 
 ## Step 5: Connect the M5StickC to your computer
-1. Connect your M5StickC to your computer using a micro-USB cable
+1. Connect your M5StickC to your computer using a USB-C cable
 
 ## Step 6: Select the correct port
 1. Go to Tools -> Port

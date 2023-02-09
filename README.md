@@ -6,6 +6,44 @@ This repository contains the FX Chrony display code for the M5 Stick C Plus. The
 
 Instructions to start with Arduino IDE 'https://docs.m5stack.com/en/quick_start/m5stickc/arduino'
 
+# Setting up the Arduino IDE environment for M5StickC
+
+## Step 1: Download and install the Arduino IDE
+1. Download the latest version of the Arduino IDE from the official website: https://www.arduino.cc/en/software
+2. Install the Arduino IDE on your computer
+
+## Step 2: Add the ESP32 board manager URL
+1. Start the Arduino IDE
+2. Go to File -> Preferences
+3. In the "Additional Boards Manager URLs" field, add the following URL: 'https://dl.espressif.com/dl/package_esp32_index.json'
+
+
+## Step 3: Install the ESP32 package
+1. Go to Tools -> Board -> Boards Manager
+2. Search for "esp32"
+3. Install the "esp32 by Espressif Systems" package
+
+## Step 4: Select the ESP32 Wrover Module board
+1. Go to Tools -> Board
+2. Select "M5Stick-C-Plus"
+
+## Step 5: Connect the M5StickC to your computer
+1. Connect your M5StickC to your computer using a micro-USB cable
+
+## Step 6: Select the correct port
+1. Go to Tools -> Port
+2. Select the port that your M5StickC is connected to
+   - On Windows: "COMx"
+   - On Mac and Linux: "/dev/cu.usbserial-xxxxx"
+
+## Step 7: Upload the Blink example
+1. Go to File -> Examples -> 01.Basics -> Blink
+2. Click the Upload button (right arrow) to upload the sketch to your M5StickC
+
+Your M5StickC should now be set up and ready to use with the Arduino IDE!
+
+
+
 If you don't know how to clone a repository use this link to download zip 'https://github.com/DaystateRebel/FXChrony_M5STICK_PLUS/archive/refs/heads/main.zip' and open .ino file in Arduino IDE.
 
 ## Required Board Definitions

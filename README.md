@@ -6,6 +6,8 @@ This repository contains the FX Chrony display code for the M5 Stick C Plus. The
 
 Instructions to start with Arduino IDE 'https://docs.m5stack.com/en/quick_start/m5stickc/arduino'
 
+If you don't know how to clone a repository use this link to download zip 'https://github.com/DaystateRebel/FXChrony_M5STICK_PLUS/archive/refs/heads/main.zip' and open .ino file in Arduino IDE.
+
 ## Required Board Definitions
 
 Before you can use this code, you need to have the M5 Stack board definitions installed in the Arduino IDE. To do this, follow these steps:

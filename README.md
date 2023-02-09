@@ -4,6 +4,8 @@
 
 This repository contains the FX Chrony display code for the M5 Stick C Plus. The FX Chrony display is a simple and effective way to keep track of your shooting data in real-time. With this project, you can quickly and easily get started with using the M5 Stick C Plus to display important shooting information such as your shot velocity, shot count, and more.
 
+Instructions to start with Arduino IDE 'https://discord.com/channels/1053770249582936104/1073126480164433960/1073126893370482689'
+
 ## Required Board Definitions
 
 Before you can use this code, you need to have the M5 Stack board definitions installed in the Arduino IDE. To do this, follow these steps:

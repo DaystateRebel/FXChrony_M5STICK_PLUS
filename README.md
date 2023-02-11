@@ -16,6 +16,7 @@ Instructions to start with Arduino IDE 'https://docs.m5stack.com/en/quick_start/
 1. Start the Arduino IDE
 2. Go to File -> Preferences
 3. In the "Additional Boards Manager URLs" field, add the following URL: 'https://dl.espressif.com/dl/package_esp32_index.json'
+4. Restart Arduino IDE
 
 
 ## Step 3: Install the ESP32 package
@@ -24,7 +25,7 @@ Instructions to start with Arduino IDE 'https://docs.m5stack.com/en/quick_start/
 3. Install the "esp32 by Espressif Systems" package
 
 ## Step 4: Select the ESP32 Wrover Module board
-1. Go to Tools -> Board
+1. Go to Tools -> Board -> M5Stack Arduino
 2. Select "M5Stick-C-Plus"
 
 ## Step 5: Connect the M5StickC to your computer
@@ -35,8 +36,9 @@ Instructions to start with Arduino IDE 'https://docs.m5stack.com/en/quick_start/
 2. Select the port that your M5StickC is connected to
    - On Windows: "COMx"
    - On Mac and Linux: "/dev/cu.usbserial-xxxxx"
+   - On some Linux distributions: "/dev/ttyUSBx"
 
-## Step 7: Upload the Blink example
+## Step 7 (optional): Upload the Blink example
 1. Go to File -> Examples -> 01.Basics -> Blink
 2. Click the Upload button (right arrow) to upload the sketch to your M5StickC
 
@@ -59,7 +61,7 @@ Before you can use this code, you need to have the M5 Stack board definitions in
 
 ## Required Libraries
 
-This project uses the M5StickCPlus and OpenFontRender libraries. To install these libraries, follow these steps:
+This project uses the M5StickCPlus and OpenFontRender libraries and M5-ENV 'https://github.com/m5stack/M5Unit-ENV/tree/master/src'. To install these libraries, follow these steps:
 
 ### M5StickCPlus
 
